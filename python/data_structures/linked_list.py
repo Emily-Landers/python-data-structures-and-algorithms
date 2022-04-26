@@ -31,10 +31,9 @@ class LinkedList:
         while current:
             if current.value == target_value:
              return True
-         
-        current = current.next
-        
-        return False   
+            current = current.next
+        else:
+            return False   
                 
 
 class TargetError:
