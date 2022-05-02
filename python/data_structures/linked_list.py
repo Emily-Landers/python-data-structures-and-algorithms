@@ -1,18 +1,19 @@
+from pickle import TRUE
+
+
 class Node:
- 
-    
-    def __init__(self, value, next_=None):
+    # Creates node
+    def __init__(self, value, next=None):
         self.value = value
-        self.next = next_
-        
+        self.next = next
+
 class LinkedList:
-    """
-    Put docstring here
-    """
+    # Creates linked list
 
     def __init__(self):
+        #  instantiate an empty linked list
         self.head = None
-        
+
     def __str__(self):
         # returns a collection of all values within linked list
         string = ""
@@ -21,34 +22,59 @@ class LinkedList:
             string += f"{{ {current.value} }} -> "
             current = current.next
         return string + "NULL"
-        
+
+
     def insert(self, value):
-        #creating a new node with the correct value
-       self.head = Node(value, self.head)
-       
-    def includes(self, target_value):
+        # creates and inserts new node into linked list
+        self.head = Node(value, self.head)
+
+    def includes(self, target):
+        # return true or false when finding a value within the linked list
         current = self.head
         while current:
-            if current.value == target_value:
-             return True
+            if current.value == target:
+                return True
             current = current.next
-        else:
-            return False  
-    
-    def insert_before(self, new_data):
-            new_node = Node(new_data)
-            new_node.next = self.head
-            #self.head = new_node 
-    
-    def append(self, new_data):
-        new_node = Node(new_data)
-        if self.head is None:
-            self.head = new_node
-            return
-        last = self.head
-        while (last.next):
-            last = last.next
-        last.next = new_node
+        return False
 
-class TargetError:
+    def append(self, value):
+        # adds a new node with the given value to the end of the list
+        current = self.head
+        while current.value:
+            if current.next == None:
+                current.next = Node(value)
+                return Node(value)
+            current = current.next
+
+    def insert_before(self, target, value):
+        # adds a new node with the given value before target node
+        current = self.head
+        try:
+            if current.value == target:
+                self.insert(value)
+            else:
+                while current.value:
+                    if current.next.value == target:
+                        after = current.next
+                        current.next = Node(value, after)
+                        return Node(value, after)
+                    current = current.next
+        except:
+            raise TargetError
+
+    def insert_after(self, target, value):
+        # adds a new node with the given value after target node
+        current = self.head
+        try:
+            while current.value:
+
+                if current.value == target:
+                    after = current.next
+                    current.next = Node(value, after)
+                    return Node(value, after)
+                current = current.next
+        except:
+            raise TargetError
+
+class TargetError(Exception):
     pass
