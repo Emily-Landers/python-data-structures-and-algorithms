@@ -90,3 +90,20 @@ class BinaryTree:
         walk(self.root, ordered_values)
 
         return ordered_values
+
+    def find_maximum_value(self):
+
+        if not self.root: return None
+
+        def walk(root, max):
+
+            if not root:
+                return max
+
+            if root.value > max:
+                max = root.value
+
+            max = walk(root.left, max)
+            return walk(root.right, max)
+
+        return walk(self.root, self.root.value)
