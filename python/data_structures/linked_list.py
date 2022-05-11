@@ -60,6 +60,20 @@ class LinkedList:
         while (last.next):
             last = last.next
         last.next = new_node
+        
+    def insert_after(self, target, value):
+        # adds a new node with the given value after target node
+        current = self.head
+        try:
+            while current.value:
+
+                if current.value == target:
+                    after = current.next
+                    current.next = Node(value, after)
+                    return Node(value, after)
+                current = current.next
+        except:
+            raise TargetError
 
     def kth_from_end(self, target):
         # Returns the node’s value that is k places from the tail of the linked list.

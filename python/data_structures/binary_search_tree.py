@@ -31,3 +31,21 @@ class BinarySearchTree(BinaryTree):
             return
 
         walk(self.root, node_to_add)
+        
+    def contains(self, target):
+
+        def walk(root):
+
+            if not root:
+                return False
+
+            elif root.value == target:
+                return True
+
+            elif root.value > target:
+                return walk(root.left)
+            elif root.value < target:
+                return walk(root.right)
+
+
+        return walk(self.root)
