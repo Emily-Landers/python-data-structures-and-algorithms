@@ -12,6 +12,9 @@ Using a Linked List as the underlying data storage mechanism, implement both a S
 
 * Create a Stack class that has a top property. It creates an empty Stack when instantiated.
 * This object should be aware of a default empty value assigned to top when the stack is created.
+
+## APIs:
+
 * push:
   * Arguments: value
   * adds a new node with that value to the top of the stack with an O(1) Time performance.
@@ -32,6 +35,8 @@ Using a Linked List as the underlying data storage mechanism, implement both a S
 
 * Create a Queue class that has a front property. It creates an empty Queue when instantiated.
 * This object should be aware of a default empty value assigned to front when the queue is created.
+
+## APIs
 
 * enqueue:
 * Arguments: value
@@ -71,3 +76,5 @@ Using a Linked List as the underlying data storage mechanism, implement both a S
 * Calling dequeue or peek on empty queue raises exception
 
 ## Approach & Efficiency
+
+Followed the lecture which gave O(1) for both time and space for each
