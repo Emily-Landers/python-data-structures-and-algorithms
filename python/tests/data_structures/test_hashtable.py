@@ -1,12 +1,10 @@
 import pytest
 from data_structures.hashtable import Hashtable
 
-
 def test_exists():
     assert Hashtable
 
 
-@pytest.mark.skip("TODO")
 def test_get_apple():
     hashtable = Hashtable()
     hashtable.set("apple", "Used for apple sauce")
@@ -15,20 +13,35 @@ def test_get_apple():
     assert actual == expected
 
 
-@pytest.mark.skip("TODO")
-def test_internals():
-    hashtable = Hashtable(1024)
-    hashtable.set("ahmad", 30)
-    hashtable.set("silent", True)
-    hashtable.set("listen", "to me")
+def test_set():
+    table = Hashtable()
+    table.set('cheese', 'blue')
 
-    actual = []
+    actual = table.table[470][0]
+    expected = ('cheese', 'blue')
+    assert actual == expected
+    
+def test_get():
+    table = Hashtable()
+    table.set('cheese', 'blue')
+    table.set('chese', 'bloo')
+    table.set('cheeese', 'bluoe')
 
-    # NOTE: purposely breaking encapsulation to test the "internals" of Hashmap
-    for item in hashtable._buckets:
-        if item:
-            actual.append(item.display())
+    actual = table.get('chese')
+    expected = 'bloo'
+    assert actual == expected
 
-    expected = [[["silent", True], ["listen", "to me"]], [["ahmad", 30]]]
+def test_contains():
+    table = Hashtable()
+    table.set('cheese', 'blue')
 
+    actual = table.contains('cheese')
+    expected = True
+    assert actual == expected
+
+def test_hash():
+    table = Hashtable()
+
+    actual = table.hash('cheese')
+    expected = 28
     assert actual == expected
