@@ -1,41 +1,67 @@
+from data_structures.linked_list import LinkedList
+
 class Hashtable():
 
-    def __init__(self) -> None:
-        self.length = 599
-        self.table = [[]] * self.length
+    def __init__(self, size=1024):
+        self.size = size
+        self._buckets = [None] * self.size
+        
+    def set(self, key, value):
+        index = self.hash(key)
+        bucket = self._buckets[index]
+        if bucket is None:
+            self._buckets[index] = LinkedList()
+        
+        self._buckets[index].insert((key, value))
+        
+    def hash(self, key):
+        char_sum = 0
+        if type(key) == str:
+            for char in key:
+                char_sum += ord(char)
+        elif type(key) == int:
+                char_sum = key
+        char_sum *= 599
+        index = char_sum % len(self._buckets)
+        return index
 
-    def string_to_int(self, string):
-        ascii_value = [ord(letter) for letter in string]
-        return sum(ascii_value)
+    def get(self, key):
+        index = self.hash(key)
+        bucket = self._buckets[index]
+    
+        current = bucket.head
 
-    def hash(self, key) -> int:
-        if type(key) is str:
-            hasher = self.string_to_int(key)
-        elif type(key) is int:
-            hasher = key
+        while current:
+            if current.value[0] == key:
+                return current.value[1]
 
-        index_position = (hasher * 6917) % self.length
-        return index_position
+            current = current.next
 
-    def set(self, key, value) -> None:
-        hash_key = self.hash(key)
-
-        list_index = self.table[hash_key]
-
-        list_index.append((key, value))
-
-    def get(self, key) -> any:
-        hash_key = self.hash(key)
-
-        index_list = self.table[hash_key]
-
-        if len(index_list) == 0:
-            return None
-        else:
-            for match in index_list:
-                if match[0] == key:
-                    return match[1]
-        return None
 
     def contains(self, key):
-        return bool(self.get(key))
+        index = self.hash(key)
+        bucket = self._buckets[index]
+
+        if bucket is None:
+            return False
+        
+        current = bucket.head
+        
+        while current:
+            if current.value[0] == key:
+                return True
+            current = current.next
+        return False
+        
+
+    def keys(self):
+        keys = set()
+        for bucket in self._buckets:
+            if bucket is not None:
+                current = bucket.head
+                while current:
+                    keys.add(container.value[0])
+                    print(keys)
+                    container = container.next
+        return keys
+

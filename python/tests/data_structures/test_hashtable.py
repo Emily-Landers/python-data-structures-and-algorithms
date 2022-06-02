@@ -1,8 +1,10 @@
 import pytest
 from data_structures.hashtable import Hashtable
 
+
 def test_exists():
     assert Hashtable
+
 
 
 def test_get_apple():
@@ -12,14 +14,6 @@ def test_get_apple():
     expected = "Used for apple sauce"
     assert actual == expected
 
-
-def test_set():
-    table = Hashtable()
-    table.set('cheese', 'blue')
-
-    actual = table.table[470][0]
-    expected = ('cheese', 'blue')
-    assert actual == expected
     
 def test_get():
     table = Hashtable()
@@ -43,5 +37,5 @@ def test_hash():
     table = Hashtable()
 
     actual = table.hash('cheese')
-    expected = 28
+    expected = 267
     assert actual == expected
