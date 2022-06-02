@@ -1,9 +1,9 @@
-from code_challenges.roman_numerals import roman_to_arabic, convert_character, printRoman
+from code_challenges.roman_numerals import roman_to_arabic, convert_character
 
 def test_exists():
     assert roman_to_arabic
     assert convert_character
-    assert printRoman
+
     
 def test_roman_to_arabic():
     num = roman_to_arabic('XI')
